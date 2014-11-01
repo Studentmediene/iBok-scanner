@@ -12,6 +12,8 @@ window.addEventListener('load', function () {
         return;
     }
 
+    var scanner = new IBokScanner();
+
     navigator.getUserMedia(
         {
             video: true,
@@ -27,6 +29,10 @@ window.addEventListener('load', function () {
 
             window.setInterval(function () {
                 context.drawImage(video, 0, 0);
+
+                scanner.scan(
+                    context.getImageData(0, 300, 800, 1)
+                );
             }, 1000);
 
         },
