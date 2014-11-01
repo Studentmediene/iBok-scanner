@@ -30,12 +30,11 @@ function IBokScanner() {
      * Calculates checksume given the first 12 digits of a barcode
      */
     function calculateChecksum(digits) {
-        //TODO
-        return 0;
+        return data.reduce(function (prev, curr, i) {
+            return prev + (i%2 == 0 ? 1 : 3) * curr;
+        }, 0);
     }
 
     this.scan = function (data) {
-        console.log(data);
     };
-
-};
+}
