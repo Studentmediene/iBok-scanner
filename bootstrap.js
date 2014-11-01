@@ -1,8 +1,10 @@
+// Some browsers use prefixes
 navigator.getUserMedia = ( navigator.getUserMedia ||
         navigator.webkitGetUserMedia ||
         navigator.mozGetUserMedia ||
         navigator.msGetUserMedia);
 
+// Let's start the demonstration on page load
 window.addEventListener('load', function () {
 
     if (!navigator.getUserMedia) {
@@ -17,16 +19,15 @@ window.addEventListener('load', function () {
         },
         function (localMediaStream) {
             //var video = document.querySelector('#output');
-            var video = document.createElement('video');
+            var video = document.createElement('video'),
+                context = document.querySelector('canvas').getContext('2d');
+
             video.src = window.URL.createObjectURL(localMediaStream);
             video.play();
 
-            window.stream = localMediaStream;
-
-            var context = document.querySelector('canvas').getContext('2d');
             window.setInterval(function () {
                 context.drawImage(video, 0, 0);
-            }, 2000);
+            }, 1000);
 
         },
         function (error) {
